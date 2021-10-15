@@ -90,7 +90,7 @@ function ProductHowItWorks() {
                 <Box sx={number}>3.</Box>
                 <Box
                   component="img"
-                  src="https://cdn-icons.flaticon.com/png/512/3276/premium/3276768.png?token=exp=1634309278~hmac=6f9b9b165db4e5860c4652e8c5577c11"
+                  src="https://cdn-icons.flaticon.com/png/512/3276/premium/3276768.png?token=exp=1634310954~hmac=a31bf6b64aa9df2e6c048f525f17311c"
                   alt="clock"
                   sx={image}
                 />
