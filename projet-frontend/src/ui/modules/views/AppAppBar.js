@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
+import Button from '../components/Button';
 
 const rightLink = {
   fontSize: 16,
@@ -23,10 +24,20 @@ function AppAppBar() {
             href="/premium-themes/onepirate/"
             sx={{ fontSize: 24 }}
           >
-            {'onepirate'}
+            {'study buddy'}
           </Link>
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <Link
+            <Button
+              color="secondary"
+              variant="contained"
+              size="medium"
+              component="a"
+              href="/premium-themes/onepirate/sign-in/"
+              sx={{ minWidth: 50, my: 1, mx:1,  borderRadius: 3 }}
+            >
+              Sign In
+            </Button>
+            {/* <Link
               color="inherit"
               variant="h6"
               underline="none"
@@ -34,15 +45,25 @@ function AppAppBar() {
               sx={rightLink}
             >
               {'Sign In'}
-            </Link>
-            <Link
+            </Link> */}
+            <Button
+              color="secondary"
+              variant="contained"
+              size="medium"
+              component="a"
+              href="/premium-themes/onepirate/sign-up/"
+              sx={{ minWidth: 100, my: 1, ml:1, mr: -1, borderRadius: 3 }}
+            >
+              Sign Up
+            </Button>
+            {/* <Link
               variant="h6"
               underline="none"
               href="/premium-themes/onepirate/sign-up/"
               sx={{ ...rightLink, color: 'secondary.main' }}
             >
               {'Sign Up'}
-            </Link>
+            </Link> */}
           </Box>
         </Toolbar>
       </AppBar>

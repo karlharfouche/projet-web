@@ -4,7 +4,7 @@ import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2370&q=80';
 
 export default function ProductHero() {
   return (
@@ -15,14 +15,13 @@ export default function ProductHero() {
         backgroundPosition: 'center',
       }}
     >
-      {/* Increase the network loading priority of the background image. */}
       <img
         style={{ display: 'none' }}
         src={backgroundImage}
         alt="increase priority"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        For all usj students
       </Typography>
       <Typography
         color="inherit"
@@ -30,7 +29,7 @@ export default function ProductHero() {
         variant="h5"
         sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
       >
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        Find and offer help, from and to other USJ students
       </Typography>
       <Button
         color="secondary"
@@ -38,12 +37,12 @@ export default function ProductHero() {
         size="large"
         component="a"
         href="/premium-themes/onepirate/sign-up/"
-        sx={{ minWidth: 200 }}
+        sx={{ minWidth: 200, borderRadius: 3 }}
       >
-        Register
+        Get started
       </Button>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-        Discover the experience
+        Scroll down for more details
       </Typography>
     </ProductHeroLayout>
   );
