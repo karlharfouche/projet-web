@@ -62,12 +62,12 @@ function ProductHowItWorks() {
                 <Box sx={number}>1.</Box>
                 <Box
                   component="img"
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
+                  src="https://cdn-icons-png.flaticon.com/512/646/646094.png"
                   alt="suitcase"
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                Sign in with your university mail.
                 </Typography>
               </Box>
             </Grid>
@@ -76,13 +76,12 @@ function ProductHowItWorks() {
                 <Box sx={number}>2.</Box>
                 <Box
                   component="img"
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
+                  src="https://cdn-icons-png.flaticon.com/512/42/42914.png"
                   alt="graph"
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so
-                  be quick.
+                Choose if you want help or if you are able to assist other students, then post your request.
                 </Typography>
               </Box>
             </Grid>
@@ -91,13 +90,12 @@ function ProductHowItWorks() {
                 <Box sx={number}>3.</Box>
                 <Box
                   component="img"
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
+                  src="https://cdn-icons.flaticon.com/png/512/3276/premium/3276768.png?token=exp=1634309278~hmac=6f9b9b165db4e5860c4652e8c5577c11"
                   alt="clock"
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  You can also browse through other students requests.
                 </Typography>
               </Box>
             </Grid>
@@ -109,7 +107,7 @@ function ProductHowItWorks() {
           variant="contained"
           component="a"
           href="/premium-themes/onepirate/sign-up/"
-          sx={{ mt: 8 }}
+          sx={{ mt: 8, borderRadius:3}}
         >
           Get started
         </Button>
