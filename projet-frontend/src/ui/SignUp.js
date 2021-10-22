@@ -12,6 +12,8 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
+import { SelectAllOutlined } from '@mui/icons-material';
+import TextField from './modules/components/TextField';
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
@@ -42,7 +44,7 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link href="/premium-themes/onepirate/sign-in/" underline="always">
+            <Link href="/sign-in" underline="always">
               Already have an account?
             </Link>
           </Typography>
@@ -79,6 +81,29 @@ function SignUp() {
                   />
                 </Grid>
               </Grid>
+              <Grid container spacing={2} sx={{ marginTop: 0.3 }}>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    autoFocus
+                    component={RFTextField}
+                    disabled={submitting || sent}
+                    fullWidth
+                    label="Faculty"
+                    name="faculty"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    component={RFTextField}
+                    disabled={submitting || sent}
+                    fullWidth
+                    label="Major"
+                    name="major"
+                    required
+                  />
+                </Grid>
+              </Grid>
               <Field
                 autoComplete="email"
                 component={RFTextField}
@@ -99,6 +124,7 @@ function SignUp() {
                 label="Password"
                 type="password"
                 margin="normal"
+                sx={{ marginBottom: 4 }}
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
@@ -114,6 +140,7 @@ function SignUp() {
                 disabled={submitting || sent}
                 color="secondary"
                 fullWidth
+                sx={{ borderRadius: 3 , marginBottom: -2}}
               >
                 {submitting || sent ? 'In progress…' : 'Sign Up'}
               </FormButton>
