@@ -19,7 +19,7 @@ function SignUp() {
   const [sent, setSent] = React.useState(false);
 
   const validate = (values) => {
-    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
+    const errors = required(['firstName', 'lastName','faculty', 'email', 'password'], values);
 
     if (!errors.email) {
       const emailError = email(values.email);
@@ -85,22 +85,31 @@ function SignUp() {
                 <Grid item xs={12} sm={6}>
                   <Field
                     autoFocus
-                    component={RFTextField}
+                    component={'select'}
                     disabled={submitting || sent}
                     fullWidth
                     label="Faculty"
                     name="faculty"
+                    style={{width:'100%' , height:60}}  
                     required
-                  />
+                    
+                >
+                  <option/>
+                  <option> ESIB</option>
+                  <option> FS</option>
+                  <option> IGE</option>
+                  <option> INCI</option>
+                  </Field>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Field
-                    component={RFTextField}
+                    component={"select"}
                     disabled={submitting || sent}
                     fullWidth
                     label="Major"
                     name="major"
                     required
+                    style={{width:'100%' , height:60}}  
                   />
                 </Grid>
               </Grid>
