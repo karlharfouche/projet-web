@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
 import TextField from '../components/TextField';
 
-function Copyright() {
+function GhRepo() {
   return (
     <React.Fragment>
       <Box component='img' src="https://cdn-icons-png.flaticon.com/512/733/733609.png" sx={{maxWidth: '10%', mx:1, my:-0.6}}/>
@@ -25,7 +25,7 @@ export default function AppFooter() {
       component="footer"
       sx={{ display: 'flex', bgcolor: 'primary.main' }}
     >
-      <Container sx={{ my: 8, display: 'flex' }}>
+      <Container sx={{ my: 5, display: 'flex' }}>
         <Grid container spacing={5}>
           <Grid item xs={6} sm={4} md={3}>
             <Grid
@@ -37,7 +37,7 @@ export default function AppFooter() {
             >
               
               <Grid item>
-                <Copyright />
+                <GhRepo />
               </Grid>
             </Grid>
           </Grid>

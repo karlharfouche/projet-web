@@ -32,38 +32,21 @@ function AppAppBar() {
               variant="contained"
               size="medium"
               component="a"
-              href="/premium-themes/onepirate/sign-in/"
+              href="/sign-in"
               sx={{ minWidth: 50, my: 1, mx:1,  borderRadius: 3 }}
             >
               Sign In
             </Button>
-            {/* <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-in/"
-              sx={rightLink}
-            >
-              {'Sign In'}
-            </Link> */}
             <Button
               color="secondary"
               variant="contained"
               size="medium"
               component="a"
-              href="/premium-themes/onepirate/sign-up/"
+              href="/sign-up"
               sx={{ minWidth: 100, my: 1, ml:1, mr: -1, borderRadius: 3 }}
             >
               Sign Up
             </Button>
-            {/* <Link
-              variant="h6"
-              underline="none"
-              href="/premium-themes/onepirate/sign-up/"
-              sx={{ ...rightLink, color: 'secondary.main' }}
-            >
-              {'Sign Up'}
-            </Link> */}
           </Box>
         </Toolbar>
       </AppBar>
