@@ -51,7 +51,7 @@ function BasicTabs() {
   return (
     <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light'}}>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.main' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} textColor="secondary" variant="fullWidth">
           <Tab label="Need Help" {...a11yProps(0)} />
           <Tab label="Able to Help" {...a11yProps(1)} />
           
