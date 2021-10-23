@@ -72,7 +72,9 @@ function MainView() {
     return(
         <>
             <AppAppBar />
-            <BasicTabs />
+            <div style={{minHeight: '82vh'}}>
+                <BasicTabs />
+            </div>
             <AppFooter />
             
         </>

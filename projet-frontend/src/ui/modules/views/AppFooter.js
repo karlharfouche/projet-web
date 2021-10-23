@@ -21,29 +21,30 @@ function GhRepo() {
 
 export default function AppFooter() {
   return (
-    <Typography
+    <div>
+      <Typography
       component="footer"
       sx={{ display: 'flex', bgcolor: 'primary.main' }}
-    >
-      <Container sx={{ my: 5, display: 'flex' }}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={3}>
-            <Grid
-              container
-              direction="column"
-              justifyContent="flex-end"
-              spacing={2}
-              sx={{ height: 30 }}
-            >
-              
-              <Grid item>
-                <GhRepo />
+      >
+        <Container sx={{ my: 5, display: 'flex' }}>
+          <Grid container spacing={5}>
+            <Grid item xs={6} sm={4} md={3}>
+              <Grid
+                container
+                direction="column"
+                justifyContent="flex-end"
+                spacing={2}
+                sx={{ height: 30 }}
+              >
+                <Grid item>
+                  <GhRepo />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-          
-        </Grid>
-      </Container>
-    </Typography>
+        </Container>
+      </Typography>
+    </div>
+    
   );
 }
