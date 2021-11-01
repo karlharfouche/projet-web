@@ -24,7 +24,7 @@ function AppAppBar() {
           >
             {'study buddy'}
           </Link>
-          {location.pathname == '/' ? 
+          {location.pathname === '/' ? 
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               color="secondary"

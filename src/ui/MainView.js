@@ -7,6 +7,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Post from "./Post";
+import '../App.css'
+import { CardonContainer } from "cardon";
+import App from './popupForm/Button'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,16 +53,19 @@ function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light'}}>
+    <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'primary.main' }}>
         <Tabs value={value} onChange={handleChange} textColor="secondary" variant="fullWidth">
           <Tab label="Need Help" {...a11yProps(0)} />
           <Tab label="Able to Help" {...a11yProps(1)} />
-          
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Need Help
+        <App />
+        <CardonContainer /> 
+        <div className='posts'>
+          <Post postInfos={{title:'hi',description:'kifak'}} />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Able to Help
