@@ -5,15 +5,13 @@ import Link from '@mui/material/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from './modules/components/Typography';
 import AppFooter from './modules/views/AppFooter';
-import AppAppBar from './modules/views/AppAppBar';
+import AppHeader from './modules/views/AppHeader';
 import AppForm from './modules/views/AppForm';
 import { email, required } from './modules/form/validation';
 import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
-import { SelectAllOutlined } from '@mui/icons-material';
-import TextField from './modules/components/TextField';
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
@@ -37,7 +35,7 @@ function SignUp() {
 
   return (
     <React.Fragment>
-      <AppAppBar />
+      <AppHeader />
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">

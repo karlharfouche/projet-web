@@ -1,4 +1,4 @@
-import AppAppBar from "./modules/views/AppAppBar";
+import AppHeader from "./modules/views/AppHeader";
 import AppFooter from "./modules/views/AppFooter";
 import withRoot from "./modules/withRoot";
 import * as React from 'react';
@@ -78,7 +78,7 @@ function BasicTabs() {
 function MainView() {
     return(
         <>
-            <AppAppBar />
+            <AppHeader />
             <div style={{minHeight: '100vh'}}>
                 <BasicTabs />
             </div>

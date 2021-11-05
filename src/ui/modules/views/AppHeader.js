@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import { useLocation } from 'react-router';
 
 
-function AppAppBar() {
+function AppHeader() {
   const location = useLocation();
 
   return (
@@ -57,4 +57,4 @@ function AppAppBar() {
   );
 }
 
-export default AppAppBar;
+export default AppHeader;
