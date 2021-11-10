@@ -11,23 +11,19 @@ function Post({postInfos}) {
         <div>
             <Card sx={{}}>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
+                        {postInfos.username}
+                    </Typography>
+                    <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
                         {postInfos.title}
                     </Typography>
                     <Typography variant="h5" component="div">
                         {postInfos.description}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                    </Typography>
-                    <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                    </Typography>
+                    
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Learn More</Button>
+                    <Button size="small">Show Profile</Button>
                 </CardActions>
             </Card>
         </div>

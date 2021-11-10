@@ -64,7 +64,7 @@ function BasicTabs() {
         <App />
         <CardonContainer /> 
         <div className='posts'>
-          <Post postInfos={{title:'hi',description:'kifak'}} />
+          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
