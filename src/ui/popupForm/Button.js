@@ -18,8 +18,8 @@ export default function App() {
     <div className="App">
       <Grid container direction="column" justify="center" alignItems="center">
         <br />
-        <Button variant="contained" onClick={onClick} color="primary">
-          Open Material-UI modal
+        <Button variant="contained" onClick={onClick} color="primary" alignItems="center">
+          Add a request
         </Button>
       </Grid>
       <br />

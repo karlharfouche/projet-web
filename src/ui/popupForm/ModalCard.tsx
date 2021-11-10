@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     // padding: theme.spacing(2, 4, 3)
   },
   customBorderRadius: {
-    borderRadius: 25,
-    width: '60%',
+    borderRadius: 20,
+    width: '50%',
     margin: 'auto',
     marginTop: '20%'
   }
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 interface Props {
   title: string;
 }
+
 
 export default withCardon<Props, boolean>(function ModalCard({
   visible,
@@ -52,7 +53,11 @@ export default withCardon<Props, boolean>(function ModalCard({
                     <TextField required id="outlined-required" label="Title" />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField id="outlined-multiline-static" label="Multiline" multiline rows={4} />
+                    <TextField id="outlined-multiline-static" label="Description" multiline rows={3} />
+                </Grid>
+                <Grid item xs={12}>
+                <Button variant="contained">Submit</Button>
+
                 </Grid>
             </Grid>
         </Box>
