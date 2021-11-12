@@ -18,7 +18,7 @@ export default function AddRequest() {
     <div className="App">
       <Grid container direction="column" justify="center" alignItems="center">
         <br />
-        <Button variant="contained" onClick={onClick} color="primary" alignItems="center">
+        <Button variant="contained" onClick={onClick} color="secondary" alignItems="center" sx={{ borderRadius: 2 }}>
           Add a request
         </Button>
       </Grid>

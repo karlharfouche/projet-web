@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   customBorderRadius: {
     borderRadius: 20,
-    width: '50%',
+    width: '30%',
     margin: 'auto',
     marginTop: '20%'
   }
@@ -46,17 +46,17 @@ export default withCardon<Props, boolean>(function ModalCard({
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <Paper className={classes.customBorderRadius} elevation={15}>
-        <Box p={1}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TextField required id="outlined-required" label="Title" />
+      <Paper className={classes.customBorderRadius} elevation={15} sx={{ backgroundColor: '#0066cc' }}>
+        <Box p={1} >
+            <Grid container spacing={2} direction="column" justifyContent="center" sx={{  }}>
+                <Grid item xs={12} sx={{ mx: "auto", mt: 3 }}>
+                    <TextField required id="outlined-required" label="Title" sx={{ backgroundColor: 'white', width: 300, borderRadius: 2 }}/>
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField id="outlined-multiline-static" label="Description" multiline rows={3} />
+                <Grid item xs={12} sx={{ mx: "auto" }}>
+                    <TextField id="outlined-multiline-static" label="Description" multiline rows={6} sx={{ backgroundColor: 'white', width: 300, borderRadius: 2 }}/>
                 </Grid>
-                <Grid item xs={12}>
-                <Button variant="contained">Submit</Button>
+                <Grid item xs={12} sx={{ mx: "auto" }}>
+                <Button variant="contained" color="secondary" sx={{ mx: "auto", mb: 2 }}>Submit</Button>
 
                 </Grid>
             </Grid>
