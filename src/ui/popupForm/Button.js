@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import TextField from "../modules/components/TextField";
 
-export default function App() {
+export default function AddRequest() {
   const [result, setResult] = React.useState();
   const [title, setTitle] = React.useState("My Modal Title");
 

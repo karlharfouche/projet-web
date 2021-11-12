@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Post from "./Post";
 import '../App.css'
 import { CardonContainer } from "cardon";
-import App from './popupForm/Button'
+import AddRequest from './popupForm/Button'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,15 +61,21 @@ function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <App />
+        <AddRequest />
         <CardonContainer /> 
+        <div className='posts'>
+          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
+          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
+
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+      <AddRequest />
+      <CardonContainer /> 
         <div className='posts'>
           <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
           
         </div>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Able to Help
       </TabPanel>
     </Box>
   );
