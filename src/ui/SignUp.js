@@ -12,6 +12,14 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
+import MuiPhoneNumber from 'material-ui-phone-number';
+
+// function handleOnChange(value) {
+//   this.setState({
+//      phone: value
+//   });
+// }
+
 
 function SignUp() {
   const [sent, setSent] = React.useState(false);
@@ -111,6 +119,8 @@ function SignUp() {
                   />
                 </Grid>
               </Grid>
+              <MuiPhoneNumber defaultCountry={'lb'} label='Phone Number' sx={{pt: 1}}/>
+
               <Field
                 autoComplete="email"
                 component={RFTextField}
@@ -121,6 +131,7 @@ function SignUp() {
                 name="email"
                 required
               />
+              
               <Field
                 fullWidth
                 component={RFTextField}
@@ -133,6 +144,7 @@ function SignUp() {
                 margin="normal"
                 sx={{ marginBottom: 4 }}
               />
+              
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
                   submitError ? (
@@ -142,6 +154,7 @@ function SignUp() {
                   ) : null
                 }
               </FormSpy>
+              
               <FormButton
                 sx={{ mt: 3, mb: 2 }}
                 disabled={submitting || sent}
