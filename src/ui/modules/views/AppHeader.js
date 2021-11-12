@@ -47,8 +47,21 @@ function AppHeader() {
               Sign Up
             </Button>
           </Box>
-            :
-          <Box sx={{ flex: 1}} />
+            : location.pathname === '/main-view' ?
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row-reverse'}}>
+            <Button
+              color="secondary"
+              variant="contained"
+              size="medium"
+              component="a"
+              href="/"
+              sx={{ minWidth: 50, my: 1, mx:1,  borderRadius: 3 }}
+            >
+              Log Out
+            </Button>
+          </Box>
+          :
+          <Box sx={{ flex: 1 }} />
           }
         </Toolbar>
       </AppBar>
