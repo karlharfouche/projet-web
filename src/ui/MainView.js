@@ -12,6 +12,33 @@ import '../App.css'
 import { CardonContainer } from "cardon";
 import AddRequest from './popupForm/Button'
 
+let jsons = [
+  {
+    id: 1,
+    username: 'Karl Harfouche',
+    title: 'Help me in CAN IM DYING',
+    description: 'Sawaya is destroying us !!!!!!!!!!'
+  },
+  {
+    id: 2,
+    username: 'Maroun Ghossain',
+    title: 'AO Help',
+    description: '        !!!!!!!!!'
+  },
+  {
+    id: 3,
+    username: 'Karl Gharios',
+    title: 'Help me in ProgFun',
+    description: '!!!!!!!!!!'
+  },
+  {
+    id: 4,
+    username: '',
+    title: 'Help me in Sem 3',
+    description: '   !!!!!!!!!!'
+  }
+]
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -45,12 +72,22 @@ function a11yProps(index) {
   };
 }
 
-function BasicTabs() {
+function BasicTabs({props}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  let displayJsons = props.map(
+    (json) => {
+      return(
+        <div key={json.id}>
+          <Post postInfos={{username: json.username, title: json.title, description: json.description}}></Post>
+        </div>
+      )
+    }
+  )
 
   return (
     <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light' }}>
@@ -64,17 +101,14 @@ function BasicTabs() {
         <AddRequest />
         <CardonContainer /> 
         <div className='posts'>
-          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
-          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
-
+          {displayJsons}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
       <AddRequest />
       <CardonContainer /> 
         <div className='posts'>
-          <Post postInfos={{username:'Username', title:'Title',description:'Description'}} />
-          
+          {displayJsons}
         </div>
       </TabPanel>
     </Box>
@@ -83,11 +117,12 @@ function BasicTabs() {
 
 
 function MainView() {
+  
     return(
         <>
             <AppHeader />
             <div style={{minHeight: '100vh'}}>
-                <BasicTabs />
+                <BasicTabs props={jsons} />
             </div>
             <AppFooter />
             

@@ -1,12 +1,9 @@
 import { withCardon } from "cardon";
 import { makeStyles } from "@mui/styles";
 import { Modal } from "@mui/material";
-import React from "react";
 import { Button } from "@mui/material";
 import { Paper } from "@mui/material";
-import Typography from "../modules/components/Typography";
-import { Box, maxWidth, width } from "@mui/system";
-import { Padding } from "@mui/icons-material";
+import { Box } from "@mui/system";
 import { TextField } from "@mui/material";
 import { Grid } from "@mui/material";
 import { FormControl } from "@mui/material";
@@ -17,12 +14,8 @@ import { InputAdornment } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-
-    // width: 400,
     backgroundColor: "white",
     border: "2px solid #000",
-
-    // padding: theme.spacing(2, 4, 3)
   },
   customBorderRadius: {
     borderRadius: 20,
@@ -40,7 +33,6 @@ interface Props {
 export default withCardon<Props, boolean>(function ModalCard({
   visible,
   get,
-  title
 }) {
   const classes = useStyles();
   return (
