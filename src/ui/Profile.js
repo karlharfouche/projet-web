@@ -70,11 +70,11 @@ function Profile() {
                             </Grid>
                         </Grid> 
                         }
-                        <Grid container sx={{ mb: 3 }}>
+                        <Grid container spacing={5} sx={{ mb: 3 }}>
                             <Grid item xs sx={{ mt: 2 }}>
                                 <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={3}>
                                 <AddFeedbackButton />
                                 <CardonContainer /> 
                             </Grid>
