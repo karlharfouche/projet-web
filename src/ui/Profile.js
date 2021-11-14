@@ -9,7 +9,9 @@ import Typography from '@mui/material/Typography';
 import Feedback from "./Feedback";
 import Rating from '@mui/material/Rating';
 import { Grid } from "@mui/material";
-import { NavigateBeforeRounded } from "@mui/icons-material";
+import AddFeedbackButton from "./addFeedback/AddFeedbackButton"
+import { CardonContainer } from "cardon";
+import Box from "@mui/material/Box"
 
 let feedbacks = [
     {
@@ -58,8 +60,7 @@ function Profile() {
                         <Typography sx={{ m: 3 }} variant="h5" component="div">
                             Phone Number: +961 76 198 781
                         </Typography>
-                        { feedbacks.length > 0 &&
-                        <>
+                        { feedbacks.length != 0 &&
                         <Grid container>
                             <Grid item xs={'auto'}>
                                 <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
@@ -67,11 +68,21 @@ function Profile() {
                             <Grid item xs={2} sx={{ ml: 1 }}>
                                 <Rating value={getOverallRating(feedbacks)} precision={0.5} readOnly/> 
                             </Grid>
-                        </Grid>            
-                        <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Feedbacks:
-                        </Typography>
-                        </>
+                        </Grid> 
+                        }
+                        <Grid container sx={{ mb: 3 }}>
+                            <Grid item xs sx={{ mt: 2 }}>
+                                <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <AddFeedbackButton />
+                                <CardonContainer /> 
+                            </Grid>
+                        </Grid>
+                        { feedbacks.length == 0 &&
+                        <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
+                            No feedback for this user ...
+                        </Typography>     
                         }{
                             feedbacks.map((x) => {
                                 return(

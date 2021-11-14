@@ -24,9 +24,9 @@ function Post({postInfos}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" sx={{mr:"auto"}}>Show Profile</Button>
+                    <Button size="small" href="/profile" sx={{mr:"auto"}}>Show Profile</Button>
                     <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
-                    {postInfos.date}
+                        {postInfos.date}
                     </Typography>
                 </CardActions>
             </Card>
