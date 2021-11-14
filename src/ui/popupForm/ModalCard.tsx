@@ -58,7 +58,7 @@ export default withCardon<Props, boolean>(function ModalCard({
                       id="standard-adornment-amount"
                       //value={values.amount}
                       //onChange={handleChange('amount')}
-                      startAdornment={<InputAdornment position="start">&nbsp;$</InputAdornment>}
+                      startAdornment={<InputAdornment position="start">&nbsp;LBP</InputAdornment>}
                       sx={{ width: 300, backgroundColor: 'white', borderRadius: 2 }}
                     />
                   </FormControl>

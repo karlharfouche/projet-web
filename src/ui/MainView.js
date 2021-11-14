@@ -39,6 +39,21 @@ let jsons = [
   }
 ]
 
+let jsons1 = [
+  {
+    id: 1,
+    username: 'Karl Harfouche',
+    title: 'I can help with web',
+    description: 'I am the best in web !!!!!!!!!!'
+  },
+  {
+    id: 2,
+    username: 'Maroun Ghossain',
+    title: 'Help in CAN offered',
+    description: 'Ask Karl Harfouche I helped him for TC2 and he nailed it !!!!!!!!!'
+  },
+]
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -72,14 +87,24 @@ function a11yProps(index) {
   };
 }
 
-function BasicTabs({props}) {
+function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  let displayJsons = props.map(
+  let displayNeed = props.need.map(
+    (json) => {
+      return(
+        <div key={json.id}>
+          <Post postInfos={{username: json.username, title: json.title, description: json.description}}></Post>
+        </div>
+      )
+    }
+  )
+
+  let displayAble = props.able.map(
     (json) => {
       return(
         <div key={json.id}>
@@ -101,14 +126,14 @@ function BasicTabs({props}) {
         <AddRequest />
         <CardonContainer /> 
         <div className='posts'>
-          {displayJsons}
+          {displayNeed}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
       <AddRequest />
       <CardonContainer /> 
         <div className='posts'>
-          {displayJsons}
+          {displayAble}
         </div>
       </TabPanel>
     </Box>
@@ -121,9 +146,9 @@ function MainView() {
     return(
         <>
             <AppHeader />
-            <div style={{minHeight: '100vh'}}>
-                <BasicTabs props={jsons} />
-            </div>
+              <div style={{minHeight: '100vh'}}>
+                  <BasicTabs need={jsons} able={jsons1} />
+              </div>
             <AppFooter />
             
         </>
