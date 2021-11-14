@@ -16,26 +16,34 @@ let jsons = [
   {
     id: 1,
     username: 'Karl Harfouche',
-    title: 'Help me in CAN IM DYING',
-    description: 'Sawaya is destroying us !!!!!!!!!!'
+    title: 'Help in CAN',
+    description: 'Need help in CAN for a TC next monday',
+    price: "100,000 LBP",
+    date: '14/11/2021'
   },
   {
     id: 2,
     username: 'Maroun Ghossain',
-    title: 'AO Help',
-    description: '        !!!!!!!!!'
+    title: 'Web development',
+    description: 'Need a web developer for a small project 2-3 weeks',
+    price: "1,000,000 LBP",
+    date: '10/11/2021'
   },
   {
     id: 3,
     username: 'Karl Gharios',
-    title: 'Help me in ProgFun',
-    description: '!!!!!!!!!!'
+    title: 'Programmation Fonctionelle',
+    description: 'Need help for a TP ',
+    price: "200,000 LBP",
+    date: '9/11/2021'
   },
   {
     id: 4,
-    username: '',
-    title: 'Help me in Sem 3',
-    description: '   !!!!!!!!!!'
+    username: 'Ralph Hallal',
+    title: 'Graphic Design',
+    description: 'Graphic Designer needed to make a logo for a startup',
+    price: "200,000 LBP",
+    date: '9/11/2021'
   }
 ]
 
@@ -43,14 +51,18 @@ let jsons1 = [
   {
     id: 1,
     username: 'Karl Harfouche',
-    title: 'I can help with web',
-    description: 'I am the best in web !!!!!!!!!!'
+    title: 'I can help in web',
+    description: 'Experience in web development',
+    price: "500,000 LBP",
+    date: '14/11/2021'
   },
   {
     id: 2,
     username: 'Maroun Ghossain',
-    title: 'Help in CAN offered',
-    description: 'Ask Karl Harfouche I helped him for TC2 and he nailed it !!!!!!!!!'
+    title: 'Can help in python',
+    description: 'Contact me if you need any help in info1, info2 and info3',
+    price: "150,000 LBP",
+    date: '13/11/2021'
   },
 ]
 
@@ -98,7 +110,7 @@ function BasicTabs(props) {
     (json) => {
       return(
         <div key={json.id}>
-          <Post postInfos={{username: json.username, title: json.title, description: json.description}}></Post>
+          <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
         </div>
       )
     }
@@ -108,7 +120,7 @@ function BasicTabs(props) {
     (json) => {
       return(
         <div key={json.id}>
-          <Post postInfos={{username: json.username, title: json.title, description: json.description}}></Post>
+          <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
         </div>
       )
     }
