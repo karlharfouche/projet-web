@@ -5,6 +5,8 @@ import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
 import Button from '../components/Button';
 import { useLocation } from 'react-router';
+import IconButton from '@mui/material/IconButton';
+import { Avatar } from '@mui/material';
 
 
 function AppHeader() {
@@ -14,7 +16,14 @@ function AppHeader() {
     <div>
       <AppBar position="fixed">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Box sx={{ flex: 1 }} />
+          {location.pathname === '/main-view' ?
+          <Box sx={{ flex: 1 }}>
+            <IconButton href='/profile'>
+              <Avatar src='https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'></Avatar>
+            </IconButton>
+          </Box>
+          :
+          <Box sx={{ flex: 1 }} />}
           <Link
             variant="h6"
             underline="none"
@@ -59,6 +68,7 @@ function AppHeader() {
             >
               Log Out
             </Button>
+
           </Box>
           :
           <Box sx={{ flex: 1 }} />

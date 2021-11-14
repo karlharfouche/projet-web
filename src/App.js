@@ -4,6 +4,7 @@ import SignIn from './ui/SignIn'
 import SignUp from './ui/SignUp'
 import ForgotPassword from './ui/ForgotPassword'
 import MainView from './ui/MainView'
+import Profile from './ui/Profile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/sign-up' component={SignUp} />
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/main-view' component={MainView} />
+        <Route path='/profile' component={Profile} />
 
       </div>
     </Router>
