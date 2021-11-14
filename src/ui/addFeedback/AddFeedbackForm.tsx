@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   customBorderRadius: {
     borderRadius: 20,
-    width: '20%',
+    width: '25%',
     margin: 'auto',
     marginTop: '10%'
   }
@@ -42,8 +42,8 @@ export default withCardon<Props, boolean>(function ModalCard({
     >
       <Paper className={classes.customBorderRadius} elevation={15} sx={{ backgroundColor: '#0066cc' }}>
         <Box p={1} >
-            <Grid container spacing={2} direction="column" justifyContent="center" sx={{  }}>
-                <Grid item xs={12} sx={{ mx: "auto", mt: 3 }}>
+            <Grid container spacing={2} direction="column" justifyContent="center">
+                <Grid item xs={12} sx={{ mx: "auto", mt: 5 }}>
                   <TextField required label="Feedback" multiline rows={6} sx={{ backgroundColor: 'white', width: 320, borderRadius: 2 }}/>
                 </Grid>
                 <Grid item xs={12} sx={{ mx: "auto" }}>
