@@ -68,9 +68,21 @@ function AppHeader() {
             >
               Log Out
             </Button>
-
           </Box>
-          :
+          : location.pathname === '/profile' ?
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row-reverse'}}>
+            <Button
+                color="secondary"
+                variant="contained"
+                size="medium"
+                component="a"
+                href="/main-view"
+                sx={{ minWidth: 50, my: 1, mx:1,  borderRadius: 3 }}
+              >
+                Back
+              </Button>
+            </Box>
+            :
           <Box sx={{ flex: 1 }} />
           }
         </Toolbar>
