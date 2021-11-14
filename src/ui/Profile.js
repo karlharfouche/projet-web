@@ -7,7 +7,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Feedback from "./Feedback";
-import { ResetTvRounded } from "@mui/icons-material";
+import Rating from '@mui/material/Rating';
+import { Grid } from "@mui/material";
+import { NavigateBeforeRounded } from "@mui/icons-material";
 
 let feedbacks = [
     {
@@ -28,6 +30,16 @@ let feedbacks = [
 ]
 
 function Profile() {
+
+    let getOverallRating = (list) => {
+        let acc = 0
+        let nb = 0
+        list.map((json) => {
+            nb += 1
+            acc += json.rating
+        })
+        return acc/nb
+    }
   
     return(
         <>
@@ -46,7 +58,21 @@ function Profile() {
                         <Typography sx={{ m: 3 }} variant="h5" component="div">
                             Phone Number: +961 76 198 781
                         </Typography>
-                        {
+                        { feedbacks.length > 0 &&
+                        <>
+                        <Grid container>
+                            <Grid item xs={'auto'}>
+                                <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
+                            </Grid>
+                            <Grid item xs={2} sx={{ ml: 1 }}>
+                                <Rating value={getOverallRating(feedbacks)} precision={0.5} readOnly/> 
+                            </Grid>
+                        </Grid>            
+                        <Typography sx={{ m: 3 }} variant="h5" component="div">
+                            Feedbacks:
+                        </Typography>
+                        </>
+                        }{
                             feedbacks.map((x) => {
                                 return(
                                     <Feedback username={x.username} rating={x.rating} feedback={x.feedback}/>
