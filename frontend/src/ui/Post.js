@@ -8,7 +8,7 @@ import { Grid } from '@mui/material';
 function Post({postInfos}) {
     return (
         <div>
-            <Card sx={{ m: 3, background: 'red' }}>
+            <Card sx={{ m: 3, background: '#3399ff' }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
                         {postInfos.username}
