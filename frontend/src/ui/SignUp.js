@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
+import { OnChange } from 'react-final-form-listeners';
 import Typography from './modules/components/Typography';
 import AppFooter from './modules/views/AppFooter';
 import AppHeader from './modules/views/AppHeader';
@@ -22,24 +23,47 @@ import MuiPhoneNumber from 'material-ui-phone-number';
 
 
 function SignUp() {
-  const [sent, setSent] = React.useState(false);
+  const [sent, setSent] = React.useState(false)
+  const [firstName, setFirstName] = React.useState('')
+  const [lastName, setLastName] = React.useState('')
+  const [faculty, setFaculty] = React.useState('')
+  const [major, setMajor] = React.useState('')
+  const [number, setNumber] = React.useState(0)
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   const validate = (values) => {
     const errors = required(['firstName', 'lastName','faculty', 'email', 'password'], values);
 
-    if (!errors.email) {
-      const emailError = email(values.email);
-      if (emailError) {
-        errors.email = emailError;
-      }
-    }
-
     return errors;
   };
 
-  const handleSubmit = () => {
+  async function handleSubmit(event) {
     setSent(true);
-  };
+    // console.log(firstName, lastName, faculty, number)
+
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:4000/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        faculty,
+        major,
+        number,
+        email,
+        password,
+      })
+    })
+
+    const data = await response.json()
+
+    console.log(data)
+  }
 
   return (
     <React.Fragment>
@@ -65,6 +89,7 @@ function SignUp() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Field
+                    value={firstName}
                     autoFocus
                     component={RFTextField}
                     disabled={submitting || sent}
@@ -74,9 +99,13 @@ function SignUp() {
                     name="firstName"
                     required
                   />
+                  <OnChange name="firstName">
+                    {(value) => {setFirstName(value)}}
+                  </OnChange>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Field
+                    value={lastName}
                     component={RFTextField}
                     disabled={submitting || sent}
                     autoComplete="family-name"
@@ -85,11 +114,15 @@ function SignUp() {
                     name="lastName"
                     required
                   />
+                  <OnChange name="lastName">
+                    {(value) => {setLastName(value)}}
+                  </OnChange>
                 </Grid>
               </Grid>
               <Grid container spacing={2} sx={{ marginTop: 0.3 }}>
                 <Grid item xs={12} sm={6}>
                   <Field
+                    value={faculty}
                     autoFocus
                     component={'select'}
                     disabled={submitting || sent}
@@ -98,7 +131,6 @@ function SignUp() {
                     name="faculty"
                     style={{width:'100%' , height:60}}  
                     required
-                    
                 >
                   <option/>
                   <option> ESIB</option>
@@ -106,9 +138,13 @@ function SignUp() {
                   <option> IGE</option>
                   <option> INCI</option>
                   </Field>
+                  <OnChange name="faculty">
+                    {(value) => {setFaculty(value)}}
+                  </OnChange>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Field
+                    value={major}
                     component={"select"}
                     disabled={submitting || sent}
                     fullWidth
@@ -116,12 +152,29 @@ function SignUp() {
                     name="major"
                     required
                     style={{width:'100%' , height:60}}  
-                  />
+                  >
+                    <option/>
+                    <option> CCE</option>
+                    <option> Civil</option>
+                    <option> Meca</option>
+                    <option> Elec</option>
+                  </Field>
+                  <OnChange name="major">
+                    {(value) => {setMajor(value)}}
+                  </OnChange>
                 </Grid>
               </Grid>
-              <MuiPhoneNumber defaultCountry={'lb'} label='Phone Number' sx={{pt: 1}}/>
+              <MuiPhoneNumber 
+                value={number}
+                onChange={(value) => setNumber(value)}
+                defaultCountry={'lb'} 
+                label='Phone Number' 
+                name='number'
+                sx={{pt: 1}}
+              />
 
               <Field
+                value={email}
                 autoComplete="email"
                 component={RFTextField}
                 disabled={submitting || sent}
@@ -131,8 +184,12 @@ function SignUp() {
                 name="email"
                 required
               />
+              <OnChange name="email">
+                {(value) => {setEmail(value)}}
+              </OnChange>
               
               <Field
+                value={password}
                 fullWidth
                 component={RFTextField}
                 disabled={submitting || sent}
@@ -144,6 +201,9 @@ function SignUp() {
                 margin="normal"
                 sx={{ marginBottom: 4 }}
               />
+              <OnChange name="password">
+                {(value) => {setPassword(value)}}
+              </OnChange>
               
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
@@ -156,6 +216,7 @@ function SignUp() {
               </FormSpy>
               
               <FormButton
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
                 disabled={submitting || sent}
                 color="secondary"
