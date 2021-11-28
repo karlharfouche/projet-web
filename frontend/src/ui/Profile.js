@@ -11,7 +11,9 @@ import Rating from '@mui/material/Rating';
 import { Grid } from "@mui/material";
 import AddFeedbackButton from "./addFeedback/AddFeedbackButton"
 import { CardonContainer } from "cardon";
-import Box from "@mui/material/Box"
+import jwt from 'jsonwebtoken'
+import React, { useEffect, useState } from 'react'
+
 
 let feedbacks = [
     {
@@ -32,7 +34,34 @@ let feedbacks = [
 ]
 
 function Profile() {
+    const [user, setUser] = useState({})
 
+    async function getUser(email) {
+        const response = await fetch('http://localhost:4000/api/users/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                })
+            })
+    
+        const data = await response.json()
+    
+        setUser(data)
+    }
+
+    useEffect(() => {
+		const token = localStorage.getItem('token')
+		if (token) {
+			const userr = jwt.decode(token)
+            getUser(userr.email)
+        }
+	}, [])
+
+    
+ 
     let getOverallRating = (list) => {
         let acc = 0
         let nb = 0
@@ -49,16 +78,16 @@ function Profile() {
                 <Card sx={{ mx: '20%', my: '3%', minHeight: '75vh', background: '#3399ff', borderRadius: 4 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
-                            Karl Harfouche's Profile
+                            {user.firstName} {user.lastName}'s Profile
                         </Typography>
                         <Typography sx={{ fontSize: 20, textAlign: 'center' }} color="text.secondary" gutterBottom>
-                            Majoring in: GIC 
+                            Majoring in: {user.major} 
                         </Typography>
                         <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Mail: karl.harfouche@net.usj.edu.lb
+                            Mail: {user.email}
                         </Typography>
                         <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Phone Number: +961 76 198 781
+                            Phone Number: {user.number}
                         </Typography>
                         { feedbacks.length != 0 &&
                         <Grid container>

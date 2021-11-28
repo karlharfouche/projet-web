@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
+import { OnChange } from 'react-final-form-listeners';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Typography from './modules/components/Typography';
@@ -11,26 +12,46 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
+import jwt from 'jsonwebtoken'
+
 
 function SignIn() {
-  const [sent, setSent] = React.useState(false);
+  const [sent, setSent] = React.useState(false)
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
 
-    if (!errors.email) {
-      const emailError = email(values.email);
-      if (emailError) {
-        errors.email = emailError;
-      }
-    }
-
     return errors;
   };
 
-  const handleSubmit = () => {
+  async function handleSubmit(event) {
     setSent(true);
-  };
+
+    event.preventDefault()
+
+    const response = await fetch('http://localhost:4000/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      })
+    })
+
+    const data = await response.json()
+
+    if (data.user) {
+      localStorage.setItem('token', data.user)
+      alert('Login successful')
+      window.location.href = '/main-view'
+    } else {
+      alert('Please check your username or password')
+    }
+  }
 
   return (
     <React.Fragment>
@@ -59,6 +80,7 @@ function SignIn() {
           {({ handleSubmit: handleSubmit2, submitting }) => (
             <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 6 }}>
               <Field
+                value={email}
                 autoComplete="email"
                 autoFocus
                 component={RFTextField}
@@ -70,7 +92,11 @@ function SignIn() {
                 required
                 size="large"
               />
+              <OnChange name="email">
+                {(value) => {setEmail(value)}}
+              </OnChange>
               <Field
+                value={password}
                 fullWidth
                 size="large"
                 component={RFTextField}
@@ -82,6 +108,10 @@ function SignIn() {
                 type="password"
                 margin="normal"
               />
+              <OnChange name="password">
+                {(value) => {setPassword(value)}}
+              </OnChange>
+            
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>
                   submitError ? (
@@ -91,7 +121,8 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-              {/* <FormButton
+              <FormButton
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
                 disabled={submitting || sent}
                 size="large"
@@ -99,8 +130,8 @@ function SignIn() {
                 fullWidth
               >
                 {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton> */}
-              <FormButton
+              </FormButton>
+              {/* <FormButton
                 sx={{ mt: 3, mb: 2 , borderRadius:3}}
                 disabled={submitting || sent}
                 size="large"
@@ -109,7 +140,7 @@ function SignIn() {
                 href="/main-view"
               >
                 {'Sign In'}
-              </FormButton>
+              </FormButton> */}
             </Box>
           )}
         </Form>

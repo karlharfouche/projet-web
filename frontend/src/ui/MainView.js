@@ -1,16 +1,18 @@
-import AppHeader from "./modules/views/AppHeader";
-import AppFooter from "./modules/views/AppFooter";
-import withRoot from "./modules/withRoot";
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Post from "./Post";
+import React, { useEffect, useState } from 'react'
+import AppHeader from "./modules/views/AppHeader"
+import AppFooter from "./modules/views/AppFooter"
+import withRoot from "./modules/withRoot"
+import PropTypes from 'prop-types'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Post from "./Post"
 import '../App.css'
-import { CardonContainer } from "cardon";
+import { CardonContainer } from "cardon"
 import AddRequest from './popupForm/Button'
+import { useHistory } from 'react-router-dom'
+import jwt from 'jsonwebtoken'
 
 let jsons = [
   {
@@ -106,25 +108,25 @@ function BasicTabs(props) {
     setValue(newValue);
   };
 
-  let displayNeed = props.need.map(
-    (json) => {
-      return(
-        <div key={json.id}>
-          <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
-        </div>
-      )
-    }
-  )
+  // let displayNeed = props.need.map(
+  //   (json) => {
+  //     return(
+  //       <div key={json.id}>
+  //         <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
+  //       </div>
+  //     )
+  //   }
+  // )
 
-  let displayAble = props.able.map(
-    (json) => {
-      return(
-        <div key={json.id}>
-          <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
-        </div>
-      )
-    }
-  )
+  // let displayAble = props.able.map(
+  //   (json) => {
+  //     return(
+  //       <div key={json.id}>
+  //         <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
+  //       </div>
+  //     )
+  //   }
+  // )
 
   return (
     <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light' }}>
@@ -138,14 +140,15 @@ function BasicTabs(props) {
         <AddRequest />
         <CardonContainer /> 
         <div className='posts'>
-          {displayNeed}
+          {/* {displayNeed} */}
+          your post:
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddRequest />
         <CardonContainer /> 
         <div className='posts'>
-          {displayAble}
+          {/* {displayAble} */}
         </div>
       </TabPanel>
     </Box>
@@ -154,17 +157,48 @@ function BasicTabs(props) {
 
 
 function MainView() {
+  const history = useHistory()
+  const [post, setPost] = useState('')
+
+  // async function getPosts() {
+  //   const req = await fetch('http://localhost:4000/api/posts', {
+  //     headers: {
+  //       'x-access-token': localStorage.getItem('token')
+  //     }
+  //   })
+
+  //   const data = req.json()
+  //   if (data.status === 'ok') {
+  //     setPost(data.post)
+  //   } else {
+  //     alert(data.error)
+  //   }
+  // }
+
+  useEffect(() => {
+		const token = localStorage.getItem('token')
+		if (token) {
+			const userLoggedIn = jwt.decode(token)
+			if (!userLoggedIn) {
+				localStorage.removeItem('token')
+				history.replace('/sign-in')
+      }
+			// else {
+			// 	getPosts()
+			// }
+		}
+	}, [])
   
-    return(
-        <>
-            <AppHeader />
-              <div style={{minHeight: '100vh'}}>
-                  <BasicTabs need={jsons} able={jsons1} />
-              </div>
-            <AppFooter />
-            
-        </>
-    );
+  return(
+      <>
+          <AppHeader />
+            <div style={{minHeight: '100vh'}}>
+                <BasicTabs />
+            </div>
+          <AppFooter />
+          
+      </>
+  );
 }
 
 export default withRoot(MainView);

@@ -14,12 +14,7 @@ import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
 import MuiPhoneNumber from 'material-ui-phone-number';
-
-// function handleOnChange(value) {
-//   this.setState({
-//      phone: value
-//   });
-// }
+import { useHistory } from 'react-router-dom'
 
 
 function SignUp() {
@@ -31,6 +26,7 @@ function SignUp() {
   const [number, setNumber] = React.useState(0)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const history = useHistory()
 
   const validate = (values) => {
     const errors = required(['firstName', 'lastName','faculty', 'email', 'password'], values);
@@ -40,7 +36,6 @@ function SignUp() {
 
   async function handleSubmit(event) {
     setSent(true);
-    // console.log(firstName, lastName, faculty, number)
 
     event.preventDefault()
 
@@ -62,7 +57,9 @@ function SignUp() {
 
     const data = await response.json()
 
-    console.log(data)
+    if(data.status === 'ok') {
+      history.push('/sign-in')
+    }
   }
 
   return (
