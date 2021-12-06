@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const User = require('./models/user.model')
+const Post = require('./models/post.model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -87,37 +88,18 @@ app.post('/api/users/profile', async (req, res) => {
     })
 })
 
-app.get('/api/posts', async (req, res) => {
+app.post('/api/posts/add', async (req, res) => {
+    console.log(req.body)
 
-    const token = req.headers['x-acces-token']
-
-    try {
-        const decoded = jwt.verify(token, 'secret123')
-        const email = decoded.email
-        const user = await User.findOne({ email: email })
-
-        return res.json({ status: 'ok', post: user.post })
-    } catch(err) {
-        console.log(err)
-        res.json({ status: 'error', error: 'invalid token' })
-    }
-    
-})
-
-app.post('/api/posts', async (req, res) => {
-
-    const token = req.headers['x-acces-token']
-
-    try {
-        const decoded = jwt.verify(token, 'secret123')
-        const email = decoded.email
-        await User.updateOne({ email: email }, { $set: { post: req.body.post }})
-
-        return { status: 'ok' }
-    } catch(err) {
-        console.log(err)
-        res.json({ status: 'error', error: 'invalid token' })
-    }
-    
+    await Post.create({
+        author: req.body.author,
+        title: req.body.title,
+        description: req.body.description,
+        fees: req.body.fees,
+        type: req.body.type,
+        createdOn: req.body.createdOn,
+        expiryDate: req.body.expiryDate,
+    })
+    res.json({ status: 'ok' })
 })
 

@@ -11,6 +11,7 @@ import Post from "./Post"
 import '../App.css'
 import { CardonContainer } from "cardon"
 import AddRequest from './popupForm/Button'
+import AddRequest1 from './popupForm1/Button'
 import { useHistory } from 'react-router-dom'
 import jwt from 'jsonwebtoken'
 
@@ -141,11 +142,10 @@ function BasicTabs(props) {
         <CardonContainer /> 
         <div className='posts'>
           {/* {displayNeed} */}
-          your post:
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AddRequest />
+        <AddRequest1 />
         <CardonContainer /> 
         <div className='posts'>
           {/* {displayAble} */}
