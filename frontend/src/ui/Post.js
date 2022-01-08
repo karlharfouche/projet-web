@@ -26,7 +26,7 @@ function Post({postInfos}) {
                 <CardActions>
                     <Button size="small" href="/profile" sx={{mr:"auto"}}>Show Profile</Button>
                     <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
-                        {postInfos.date}
+                        {postInfos.date.substring(0, 10)}
                     </Typography>
                 </CardActions>
             </Card>

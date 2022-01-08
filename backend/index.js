@@ -69,7 +69,6 @@ app.post('/api/users/login', async (req, res) => {
         return res.json({ status: 'ok', user: token })
     }
 
-
 })
 
 app.post('/api/users/profile', async (req, res) => {
@@ -101,5 +100,28 @@ app.post('/api/posts/add', async (req, res) => {
         expiryDate: req.body.expiryDate,
     })
     res.json({ status: 'ok' })
+})
+
+// app.post('api/posts/get', async (req, res) => {
+
+//     const posts = await Post.find({
+//         type: req.body.type,
+//     })
+
+//     return res.json({
+//         author: posts.author,
+//         title: posts.title,
+//         description: posts.description,
+//         fees: posts.fees,
+//         type: posts.type,
+//         createdOn: posts.createdOn,
+//         expiryDate: posts.expiryDate,
+//     })
+// })
+
+app.get('/api/posts/get', async (req, res) => {
+    Post.find({}, (err, doc) => {
+        res.send(doc)
+    })
 })
 

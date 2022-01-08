@@ -104,30 +104,37 @@ function a11yProps(index) {
 
 function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  // let displayNeed = props.need.map(
-  //   (json) => {
-  //     return(
-  //       <div key={json.id}>
-  //         <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
-  //       </div>
-  //     )
-  //   }
-  // )
+  
 
-  // let displayAble = props.able.map(
-  //   (json) => {
-  //     return(
-  //       <div key={json.id}>
-  //         <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.price, date: json.date}}></Post>
-  //       </div>
-  //     )
-  //   }
-  // )
+  let need = props.posts.map(
+    (json) => {
+      if (json.type === "need") {
+        return(
+          <div key={json.id}>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn}}></Post>
+          </div>
+        )
+      }
+    }
+  )
+
+  let able = props.posts.map(
+    (json) => {
+      if (json.type === "able") {
+        return(
+          <div key={json.id}>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn}}></Post>
+          </div>
+        )
+      }
+    }
+  )
 
   return (
     <Box sx={{ width: '100%',flex: 1, bgcolor: 'primary.light' }}>
@@ -141,14 +148,14 @@ function BasicTabs(props) {
         <AddRequest />
         <CardonContainer /> 
         <div className='posts'>
-          {/* {displayNeed} */}
+          {need}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddRequest1 />
         <CardonContainer /> 
         <div className='posts'>
-          {/* {displayAble} */}
+          {able}
         </div>
       </TabPanel>
     </Box>
@@ -158,22 +165,20 @@ function BasicTabs(props) {
 
 function MainView() {
   const history = useHistory()
-  const [post, setPost] = useState('')
+  const [posts, setPosts] = React.useState([])
 
-  // async function getPosts() {
-  //   const req = await fetch('http://localhost:4000/api/posts', {
-  //     headers: {
-  //       'x-access-token': localStorage.getItem('token')
-  //     }
-  //   })
+  async function getPosts() {
+    const response = await fetch('http://localhost:4000/api/posts/get', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
 
-  //   const data = req.json()
-  //   if (data.status === 'ok') {
-  //     setPost(data.post)
-  //   } else {
-  //     alert(data.error)
-  //   }
-  // }
+    const data = await response.json()
+
+    setPosts(data)
+  }
 
   useEffect(() => {
 		const token = localStorage.getItem('token')
@@ -183,17 +188,16 @@ function MainView() {
 				localStorage.removeItem('token')
 				history.replace('/sign-in')
       }
-			// else {
-			// 	getPosts()
-			// }
 		}
+    getPosts()
+    console.log(posts)
 	}, [])
   
   return(
       <>
           <AppHeader />
             <div style={{minHeight: '100vh'}}>
-                <BasicTabs />
+                <BasicTabs posts={posts}/>
             </div>
           <AppFooter />
           

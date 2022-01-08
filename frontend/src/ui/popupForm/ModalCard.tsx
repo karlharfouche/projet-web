@@ -85,7 +85,6 @@ export default withCardon<Props, boolean>(function ModalCard({
 		const token = localStorage.getItem('token')
 		if (token) {
 			const userr: any = jwt.decode(token)
-          // (userr != null) && 
           getUser(userr.email)
         }
 	}, [])
