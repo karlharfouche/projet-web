@@ -8,6 +8,9 @@ import { TextField } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Rating } from "@mui/material";
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import jwt from 'jsonwebtoken'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,6 +35,44 @@ export default withCardon<Props, boolean>(function ModalCard({
   visible,
   get,
 }) {
+
+  const location = useLocation()
+  const concerned = location.pathname.substring(8, location.pathname.length)
+  const [feedback, setFeedback] = useState('')
+  const [rating, setRating] = useState<number | null>(0)
+  const [author, setAuthor] = useState('')
+
+  async function handleSubmit() {
+
+    console.log('hhihihihi')
+  
+    const response = await fetch('http://localhost:4000/api/feedback/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        author,
+        feedback, 
+        rating,
+        concerned,
+      })
+    })
+  
+    const data = await response.json()
+
+    console.log(data)
+
+  }
+
+  useEffect(() => {
+		const token = localStorage.getItem('token')
+		if (token) {
+			const userr: any = jwt.decode(token)
+      setAuthor(userr.email)
+        }
+	}, [])
+
   const classes = useStyles();
   return (
     <Modal
@@ -44,18 +85,20 @@ export default withCardon<Props, boolean>(function ModalCard({
         <Box p={1} >
             <Grid container spacing={2} direction="column" justifyContent="center">
                 <Grid item xs={12} sx={{ mx: "auto", mt: 5 }}>
-                  <TextField required label="Feedback" multiline rows={6} sx={{ backgroundColor: 'white', width: 320, borderRadius: 2 }}/>
+                  <TextField required value={feedback} onChange={(event) => {setFeedback(event.target.value)}} label="Feedback" multiline rows={6} sx={{ backgroundColor: 'white', width: 320, borderRadius: 2 }}/>
                 </Grid>
                 <Grid item xs={12} sx={{ mx: "auto" }}>
                   <Typography component="legend">Rating:</Typography>
                   <Rating
                     precision={0.5}
-                    //value={value}
-                    //onChange={(event, newValue) => {setValue(newValue);}}
+                    value={rating}
+                    onChange={(event, newValue: number | null) => {
+                      setRating(newValue);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sx={{ mx: "auto" }}>
-                  <Button variant="contained" color="secondary" sx={{ mx: "auto", mb: 2 }}>Submit</Button>
+                  <Button onClick={handleSubmit} variant="contained" color="secondary" sx={{ mx: "auto", mb: 2 }}>Submit</Button>
                 </Grid>
             </Grid>
         </Box>

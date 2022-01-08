@@ -65,27 +65,11 @@ export default withCardon<Props, boolean>(function ModalCard({
 
   }
 
-  async function getUser(email: String) {
-    const response = await fetch('http://localhost:4000/api/users/profile', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email,
-        })
-    })
-  
-    const data = await response.json()
-  
-    setAuthor(data.email)
-  }
-
   useEffect(() => {
 		const token = localStorage.getItem('token')
 		if (token) {
 			const userr: any = jwt.decode(token)
-          getUser(userr.email)
+        setAuthor(userr.email)
         }
 	}, [])
 

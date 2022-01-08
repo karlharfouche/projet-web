@@ -15,26 +15,9 @@ import jwt from 'jsonwebtoken'
 import React, { useEffect, useState } from 'react'
 
 
-let feedbacks = [
-    {
-        username: "Maroun Ghossain",
-        rating: 5,
-        feedback: "Best teacher ever!"
-    },
-    {
-        username: "Karl Gharios",
-        rating: 4,
-        feedback: "Helped me in C++"
-    },
-    {
-        username: "Ralph Hallal",
-        rating: 5,
-        feedback: "Without him I can't do anything by myself"
-    },
-]
-
 function PostProfile({match}) {
     const [user, setUser] = useState({})
+    const [feedbacks, setFeedbacks] = useState([])
 
     const { params: { name } } = match
 
@@ -54,17 +37,26 @@ function PostProfile({match}) {
         setUser(data)
     }
 
+    async function getFeedbacks() {
+        const response = await fetch('http://localhost:4000/api/feedback/get', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+        const data = await response.json()
+
+        console.log(data)
+
+        setFeedbacks(data)
+    }
+
     useEffect(() => {
-		// const token = localStorage.getItem('token')
-		// if (token) {
-		// 	const userr = jwt.decode(token)
-        //     getUser(userr.email)
-        // }
-        console.log(match.params.name)
         getUser(match.params.name)
+        getFeedbacks()
 	}, [])
 
-    
     let getOverallRating = (list) => {
         let acc = 0
         let nb = 0
@@ -111,15 +103,17 @@ function PostProfile({match}) {
                                 <CardonContainer /> 
                             </Grid>
                         </Grid>
-                        { feedbacks.length == 0 &&
+                        { feedbacks.filter(x => x.concerned === match.params.name).length == 0 &&
                         <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
                             No feedback for this user ...
-                        </Typography>     
+                        </Typography>
                         }{
                             feedbacks.map((x) => {
-                                return(
-                                    <Feedback username={x.username} rating={x.rating} feedback={x.feedback}/>
-                                )
+                                if (x.concerned === match.params.name) {
+                                    return(
+                                        <Feedback username={x.author} rating={x.rating} feedback={x.feedback}/>
+                                    )
+                                }
                             })   
                         }
                     </CardContent>
