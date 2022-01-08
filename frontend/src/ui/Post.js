@@ -3,7 +3,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
 
 function Post({postInfos}) {
     return (
@@ -24,7 +23,7 @@ function Post({postInfos}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" href="/profile" sx={{mr:"auto"}}>Show Profile</Button>
+                    <Button size="small" href={"/profile" + postInfos.author} sx={{mr:"auto"}}>Show Profile</Button>
                     <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
                         {postInfos.date.substring(0, 10)}
                     </Typography>

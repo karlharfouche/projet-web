@@ -15,60 +15,6 @@ import AddRequest1 from './popupForm1/Button'
 import { useHistory } from 'react-router-dom'
 import jwt from 'jsonwebtoken'
 
-let jsons = [
-  {
-    id: 1,
-    username: 'Karl Harfouche',
-    title: 'Help in CAN',
-    description: 'Need help in CAN for a TC next monday',
-    price: "100,000 LBP",
-    date: '14/11/2021'
-  },
-  {
-    id: 2,
-    username: 'Maroun Ghossain',
-    title: 'Web development',
-    description: 'Need a web developer for a small project 2-3 weeks',
-    price: "1,000,000 LBP",
-    date: '10/11/2021'
-  },
-  {
-    id: 3,
-    username: 'Karl Gharios',
-    title: 'Programmation Fonctionelle',
-    description: 'Need help for a TP ',
-    price: "200,000 LBP",
-    date: '9/11/2021'
-  },
-  {
-    id: 4,
-    username: 'Ralph Hallal',
-    title: 'Graphic Design',
-    description: 'Graphic Designer needed to make a logo for a startup',
-    price: "200,000 LBP",
-    date: '9/11/2021'
-  }
-]
-
-let jsons1 = [
-  {
-    id: 1,
-    username: 'Karl Harfouche',
-    title: 'I can help in web',
-    description: 'Experience in web development',
-    price: "500,000 LBP",
-    date: '14/11/2021'
-  },
-  {
-    id: 2,
-    username: 'Maroun Ghossain',
-    title: 'Can help in python',
-    description: 'Contact me if you need any help in info1, info2 and info3',
-    price: "150,000 LBP",
-    date: '13/11/2021'
-  },
-]
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -117,7 +63,7 @@ function BasicTabs(props) {
       if (json.type === "need") {
         return(
           <div key={json.id}>
-            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn}}></Post>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author}}></Post>
           </div>
         )
       }
@@ -129,7 +75,7 @@ function BasicTabs(props) {
       if (json.type === "able") {
         return(
           <div key={json.id}>
-            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn}}></Post>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author}}></Post>
           </div>
         )
       }

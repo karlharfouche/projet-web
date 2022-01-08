@@ -69,7 +69,7 @@ function AppHeader() {
               Log Out
             </Button>
           </Box>
-          : location.pathname === '/profile' ?
+          : location.pathname.includes('/profile') ?
           <Box sx={{ flex: 1, display: 'flex', flexDirection: 'row-reverse'}}>
             <Button
                 color="secondary"

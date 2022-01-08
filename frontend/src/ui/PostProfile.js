@@ -33,8 +33,10 @@ let feedbacks = [
     },
 ]
 
-function Profile() {
+function PostProfile({match}) {
     const [user, setUser] = useState({})
+
+    const { params: { name } } = match
 
     async function getUser(email) {
         const response = await fetch('http://localhost:4000/api/users/profile', {
@@ -53,15 +55,16 @@ function Profile() {
     }
 
     useEffect(() => {
-		const token = localStorage.getItem('token')
-		if (token) {
-			const userr = jwt.decode(token)
-            getUser(userr.email)
-        }
+		// const token = localStorage.getItem('token')
+		// if (token) {
+		// 	const userr = jwt.decode(token)
+        //     getUser(userr.email)
+        // }
+        console.log(match.params.name)
+        getUser(match.params.name)
 	}, [])
 
     
- 
     let getOverallRating = (list) => {
         let acc = 0
         let nb = 0
@@ -103,6 +106,10 @@ function Profile() {
                             <Grid item xs sx={{ mt: 2 }}>
                                 <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
                             </Grid>
+                            <Grid item xs={3}>
+                                <AddFeedbackButton />
+                                <CardonContainer /> 
+                            </Grid>
                         </Grid>
                         { feedbacks.length == 0 &&
                         <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
@@ -122,4 +129,4 @@ function Profile() {
     );
 }
 
-export default withRoot(Profile);
+export default withRoot(PostProfile);

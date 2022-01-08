@@ -5,6 +5,7 @@ import SignUp from './ui/SignUp'
 import ForgotPassword from './ui/ForgotPassword'
 import MainView from './ui/MainView'
 import Profile from './ui/Profile'
+import PostProfile from './ui/PostProfile'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/forgot-password' component={ForgotPassword} />
         <Route path='/main-view' component={MainView} />
         <Route path='/profile' component={Profile} />
+        <Route path='/profile:name' component={PostProfile} />
 
       </div>
     </Router>

@@ -102,23 +102,6 @@ app.post('/api/posts/add', async (req, res) => {
     res.json({ status: 'ok' })
 })
 
-// app.post('api/posts/get', async (req, res) => {
-
-//     const posts = await Post.find({
-//         type: req.body.type,
-//     })
-
-//     return res.json({
-//         author: posts.author,
-//         title: posts.title,
-//         description: posts.description,
-//         fees: posts.fees,
-//         type: posts.type,
-//         createdOn: posts.createdOn,
-//         expiryDate: posts.expiryDate,
-//     })
-// })
-
 app.get('/api/posts/get', async (req, res) => {
     Post.find({}, (err, doc) => {
         res.send(doc)
