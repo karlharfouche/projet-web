@@ -125,7 +125,7 @@ function SignIn() {
               </FormSpy>
               <FormButton
                 onClick={handleSubmit}
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, borderRadius:3 }}
                 disabled={submitting || sent}
                 size="large"
                 color="secondary"
