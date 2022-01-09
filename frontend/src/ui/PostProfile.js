@@ -12,7 +12,7 @@ import { Grid } from "@mui/material";
 import AddFeedbackButton from "./addFeedback/AddFeedbackButton"
 import { CardonContainer } from "cardon";
 import jwt from 'jsonwebtoken'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 function PostProfile({match}) {

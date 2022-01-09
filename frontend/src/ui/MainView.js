@@ -126,6 +126,20 @@ function MainView() {
     setPosts(data)
   }
 
+  async function delPosts() {
+    const response = await fetch('http://localhost:4000/api/posts/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+    const res = await response.json()
+
+    console.log(res)
+  }
+
+
   useEffect(() => {
 		const token = localStorage.getItem('token')
 		if (token) {
@@ -135,8 +149,8 @@ function MainView() {
 				history.replace('/sign-in')
       }
 		}
+    delPosts()
     getPosts()
-    console.log(posts)
 	}, [])
   
   return(

@@ -4,6 +4,9 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const User = require('./models/user.model')
 const Post = require('./models/post.model')
+const Feedback = require('./models/feedback.model')
+const Faculties = require('./models/faculties.model')
+const Majors = require('./models/majors.model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -108,3 +111,41 @@ app.get('/api/posts/get', async (req, res) => {
     })
 })
 
+app.post('/api/feedback/add', async (req, res) => {
+    console.log(req.body)
+
+    await Feedback.create({
+        author: req.body.author,
+        feedback: req.body.feedback,
+        rating: req.body.rating,
+        concerned: req.body.concerned,
+    })
+
+    res.json({ status: 'ok' })
+})
+
+app.get('/api/feedback/get', async (req, res) => {
+    Feedback.find({}, (err, doc) => {
+        res.send(doc)
+    })
+})
+
+app.get('/api/faculties/get', async (req, res) => {
+    Faculties.find({}, (err, doc) => {
+        res.send(doc)
+    })
+})
+
+app.get('/api/majors/get', async (req, res) => {
+    Majors.find({}, (err, doc) => {
+        res.send(doc)
+    })
+})
+
+app.post('/api/posts/delete', async (req, res) => {
+
+    Post.deleteMany( { expiryDate: { $lte: new Date() } }, function(err, obj) {
+        if (err) throw err
+      }) 
+    return res.json({ status: 'ok' })
+})

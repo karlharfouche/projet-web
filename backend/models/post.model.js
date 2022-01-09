@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+let created = new Date()
+
+
 const Post = new mongoose.Schema(
     {
         author: { type: String, required: true },
@@ -8,7 +11,8 @@ const Post = new mongoose.Schema(
         fees: { type: Number },
         type: { type: String, required: true },
         createdOn: { type: Date, required: true, default: new Date() },
-        expiryDate: { type: Date },
+        expiryDate: { type: Date, required: true, default: new Date().setMonth(created.getMonth() + 1) },
+
     },
     { collection : 'posts-data' }
 )

@@ -15,6 +15,7 @@ import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 
 function SignUp() {
@@ -27,6 +28,9 @@ function SignUp() {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const history = useHistory()
+
+  const [faculties, setFaculties] = useState([])
+  const [majors, setMajors] = useState([])
 
   const validate = (values) => {
     const errors = required(['firstName', 'lastName','faculty', 'email', 'password'], values);
@@ -61,6 +65,42 @@ function SignUp() {
       history.push('/sign-in')
     }
   }
+
+  async function getFaculties() {
+    const response = await fetch('http://localhost:4000/api/faculties/get', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+    const data = await response.json()
+
+    console.log(data)
+
+    setFaculties(data)
+  }
+
+  async function getMajors() {
+    const response = await fetch('http://localhost:4000/api/majors/get', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+    const data = await response.json()
+
+    console.log(data)
+
+    setMajors(data)
+  }
+
+
+  useEffect(() => {
+    getFaculties()
+    getMajors()
+  }, [])
 
   return (
     <React.Fragment>
@@ -130,10 +170,11 @@ function SignUp() {
                     required
                 >
                   <option/>
-                  <option> ESIB</option>
-                  <option> FS</option>
-                  <option> IGE</option>
-                  <option> INCI</option>
+                  {faculties.map(fac => {
+                    return(
+                      <option> {fac.name} </option>
+                    )
+                  })}
                   </Field>
                   <OnChange name="faculty">
                     {(value) => {setFaculty(value)}}
@@ -151,10 +192,11 @@ function SignUp() {
                     style={{width:'100%' , height:60}}  
                   >
                     <option/>
-                    <option> CCE</option>
-                    <option> Civil</option>
-                    <option> Meca</option>
-                    <option> Elec</option>
+                    {majors.filter(major => major.faculty === faculty).map(major => {
+                      return(
+                        <option> {major.name} </option>
+                      )
+                    })}
                   </Field>
                   <OnChange name="major">
                     {(value) => {setMajor(value)}}
