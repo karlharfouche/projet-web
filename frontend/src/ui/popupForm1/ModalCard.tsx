@@ -61,6 +61,12 @@ export default withCardon<Props, boolean>(function ModalCard({
   
     const data = await response.json()
 
+    setTitle('')
+    setDescription('')
+    setFees(0)
+    setAuthor('')
+    window.location.reload()
+
     console.log(data)
 
   }
