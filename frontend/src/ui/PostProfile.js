@@ -11,13 +11,13 @@ import Rating from '@mui/material/Rating';
 import { Grid } from "@mui/material";
 import AddFeedbackButton from "./addFeedback/AddFeedbackButton"
 import { CardonContainer } from "cardon";
-import jwt from 'jsonwebtoken'
 import { useEffect, useState } from 'react'
 
 
 function PostProfile({match}) {
     const [user, setUser] = useState({})
     const [feedbacks, setFeedbacks] = useState([])
+    const [fetched, setFetched] = useState(false)
 
     const { params: { name } } = match
 
@@ -35,6 +35,7 @@ function PostProfile({match}) {
         const data = await response.json()
     
         setUser(data)
+        setFetched(true)
     }
 
     async function getFeedbacks() {
@@ -72,50 +73,60 @@ function PostProfile({match}) {
             <AppHeader />
                 <Card sx={{ mx: '20%', my: '3%', minHeight: '75vh', background: '#3399ff', borderRadius: 4 }}>
                     <CardContent>
-                        <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
-                            {user.firstName} {user.lastName}'s Profile
-                        </Typography>
-                        <Typography sx={{ fontSize: 20, textAlign: 'center' }} color="text.secondary" gutterBottom>
-                            Majoring in: {user.major} 
-                        </Typography>
-                        <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Mail: {user.email}
-                        </Typography>
-                        <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Phone Number: {user.number}
-                        </Typography>
-                        { feedbacks.length != 0 &&
-                        <Grid container>
-                            <Grid item xs={'auto'}>
-                                <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
-                            </Grid>
-                            <Grid item xs={2} sx={{ ml: 1 }}>
-                                <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === match.params.name))} precision={0.5} readOnly/> 
-                            </Grid>
-                        </Grid> 
-                        }
-                        <Grid container spacing={5} sx={{ mb: 3 }}>
-                            <Grid item xs sx={{ mt: 2 }}>
-                                <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <AddFeedbackButton />
-                                <CardonContainer /> 
-                            </Grid>
-                        </Grid>
-                        { feedbacks.filter(x => x.concerned === match.params.name).length == 0 &&
-                        <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
-                            No feedback for this user ...
-                        </Typography>
-                        }{
-                            feedbacks.map((x) => {
-                                if (x.concerned === match.params.name) {
-                                    return(
-                                        <Feedback username={x.author} rating={x.rating} feedback={x.feedback}/>
-                                    )
+                        { fetched ? (
+                            <div>
+                                <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
+                                    {user.firstName} {user.lastName}'s Profile
+                                </Typography>
+                                <Typography sx={{ fontSize: 20, textAlign: 'center' }} color="text.secondary" gutterBottom>
+                                    Majoring in: {user.major} 
+                                </Typography>
+                                <Typography sx={{ m: 3 }} variant="h5" component="div">
+                                    Mail: {user.email}
+                                </Typography>
+                                <Typography sx={{ m: 3 }} variant="h5" component="div">
+                                    Phone Number: {user.number}
+                                </Typography>
+                                { feedbacks.length != 0 &&
+                                <Grid container>
+                                    <Grid item xs={'auto'}>
+                                        <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
+                                    </Grid>
+                                    <Grid item xs={2} sx={{ ml: 1 }}>
+                                        <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === match.params.name))} precision={0.5} readOnly/> 
+                                    </Grid>
+                                </Grid> 
                                 }
-                            })   
+                                <Grid container spacing={5} sx={{ mb: 3 }}>
+                                    <Grid item xs sx={{ mt: 2 }}>
+                                        <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <AddFeedbackButton />
+                                        <CardonContainer /> 
+                                    </Grid>
+                                </Grid>
+                                { feedbacks.filter(x => x.concerned === match.params.name).length == 0 &&
+                                <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
+                                    No feedback for this user ...
+                                </Typography>
+                                }{
+                                    feedbacks.map((x) => {
+                                        if (x.concerned === match.params.name) {
+                                            return(
+                                                <Feedback username={x.author} rating={x.rating} feedback={x.feedback}/>
+                                            )
+                                        }
+                                    })   
+                                }
+                                </div>
+                            ):(
+                                <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
+                                    Loading ...
+                                </Typography>
+                            )
                         }
+                        
                     </CardContent>
                 </Card>
             <AppFooter />

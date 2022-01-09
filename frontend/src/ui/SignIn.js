@@ -12,7 +12,6 @@ import RFTextField from './modules/form/RFTextField';
 import FormButton from './modules/form/FormButton';
 import FormFeedback from './modules/form/FormFeedback';
 import withRoot from './modules/withRoot';
-import jwt from 'jsonwebtoken'
 
 
 function SignIn() {
@@ -47,10 +46,12 @@ function SignIn() {
 
     if (data.user) {
       localStorage.setItem('token', data.user)
-      alert('Login successful')
       window.location.href = '/main-view'
     } else {
-      alert('Please check your username or password')
+      alert('Please check your email or password')
+      setSent(false)
+      setEmail('')
+      setPassword('')
     }
   }
 

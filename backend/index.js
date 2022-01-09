@@ -142,9 +142,17 @@ app.get('/api/majors/get', async (req, res) => {
     })
 })
 
-app.post('/api/posts/delete', async (req, res) => {
+app.post('/api/posts/delete/exp', async (req, res) => {
 
     Post.deleteMany( { expiryDate: { $lte: new Date() } }, function(err, obj) {
+        if (err) throw err
+      }) 
+    return res.json({ status: 'ok' })
+})
+
+app.post('/api/posts/delete/userDel', async (req, res) => {
+
+    Post.deleteMany( { _id: req.body._id }, function(err, obj) {
         if (err) throw err
       }) 
     return res.json({ status: 'ok' })

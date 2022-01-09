@@ -63,7 +63,7 @@ function BasicTabs(props) {
       if (json.type === "need") {
         return(
           <div key={json.id}>
-            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author}}></Post>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author, _id: json._id}}></Post>
           </div>
         )
       }
@@ -75,7 +75,7 @@ function BasicTabs(props) {
       if (json.type === "able") {
         return(
           <div key={json.id}>
-            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author}}></Post>
+            <Post postInfos={{username: json.username, title: json.title, description: json.description, price: json.fees, date: json.createdOn, author: json.author, _id: json._id}}></Post>
           </div>
         )
       }
@@ -127,7 +127,7 @@ function MainView() {
   }
 
   async function delPosts() {
-    const response = await fetch('http://localhost:4000/api/posts/delete', {
+    const response = await fetch('http://localhost:4000/api/posts/delete/exp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

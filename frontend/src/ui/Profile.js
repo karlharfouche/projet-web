@@ -18,6 +18,7 @@ import React, { useEffect, useState } from 'react'
 function Profile() {
     const [user, setUser] = useState({})
     const [feedbacks, setFeedbacks] = useState([])
+    const [fetched, setFetched] = useState(false)
 
     async function getUser(email) {
         const response = await fetch('http://localhost:4000/api/users/profile', {
@@ -48,6 +49,7 @@ function Profile() {
         console.log(data)
 
         setFeedbacks(data)
+        setFetched(true)
     }
 
     useEffect(() => {
@@ -75,46 +77,57 @@ function Profile() {
             <AppHeader />
                 <Card sx={{ mx: '20%', my: '3%', minHeight: '75vh', background: '#3399ff', borderRadius: 4 }}>
                     <CardContent>
-                        <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
-                            {user.firstName} {user.lastName}'s Profile
-                        </Typography>
-                        <Typography sx={{ fontSize: 20, textAlign: 'center' }} color="text.secondary" gutterBottom>
-                            Majoring in: {user.major} 
-                        </Typography>
-                        <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Mail: {user.email}
-                        </Typography>
-                        <Typography sx={{ m: 3 }} variant="h5" component="div">
-                            Phone Number: {user.number}
-                        </Typography>
-                        { feedbacks.length != 0 &&
-                        <Grid container>
-                            <Grid item xs={'auto'}>
-                                <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
+                        { fetched ?
+                            (
+                            <div>
+                                <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
+                                    {user.firstName} {user.lastName}'s Profile
+                                </Typography>
+                                <Typography sx={{ fontSize: 20, textAlign: 'center' }} color="text.secondary" gutterBottom>
+                                    Majoring in: {user.major} 
+                                </Typography>
+                                <Typography sx={{ m: 3 }} variant="h5" component="div">
+                                    Mail: {user.email}
+                                </Typography>
+                                <Typography sx={{ m: 3 }} variant="h5" component="div">
+                                    Phone Number: {user.number}
+                                </Typography>
+                            { feedbacks.length != 0 &&
+                            <Grid container>
+                                <Grid item xs={'auto'}>
+                                    <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
+                                </Grid>
+                                <Grid item xs={2} sx={{ ml: 1 }}>
+                                    <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === user.email))} precision={0.5} readOnly/> 
+                                </Grid>
+                            </Grid> 
+                            }
+                            <Grid container spacing={5} sx={{ mb: 3 }}>
+                                <Grid item xs sx={{ mt: 2 }}>
+                                    <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={2} sx={{ ml: 1 }}>
-                                <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === user.email))} precision={0.5} readOnly/> 
-                            </Grid>
-                        </Grid> 
+                            { feedbacks.filter(x => x.concerned === user.email).length == 0 &&
+                            <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
+                                No feedback for this user ...
+                            </Typography>     
+                            }{
+                                feedbacks.map((x) => {
+                                    if (x.concerned === user.email) {
+                                        return(
+                                            <Feedback username={x.author} rating={x.rating} feedback={x.feedback}/>
+                                        )
+                                    }
+                                })   
+                            }
+                            </div>
+                            ):(
+                            <Typography sx={{ fontSize: 50, textAlign: 'center' }} color="text.primary" gutterBottom>
+                                Loading ...
+                            </Typography>
+                            )
                         }
-                        <Grid container spacing={5} sx={{ mb: 3 }}>
-                            <Grid item xs sx={{ mt: 2 }}>
-                                <Typography sx={{ m: 3, display: "inline" }} variant="h5" component="div">Feedbacks:</Typography>
-                            </Grid>
-                        </Grid>
-                        { feedbacks.filter(x => x.concerned === user.email).length == 0 &&
-                        <Typography sx={{ m: 3, ml: 5, fontSize: 20 }} color="text.secondary" component="div">
-                            No feedback for this user ...
-                        </Typography>     
-                        }{
-                            feedbacks.map((x) => {
-                                if (x.concerned === user.email) {
-                                    return(
-                                        <Feedback username={x.author} rating={x.rating} feedback={x.feedback}/>
-                                    )
-                                }
-                            })   
-                        }
+                        
                     </CardContent>
                 </Card>
             <AppFooter />
