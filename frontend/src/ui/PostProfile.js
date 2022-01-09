@@ -90,7 +90,7 @@ function PostProfile({match}) {
                                 <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
                             </Grid>
                             <Grid item xs={2} sx={{ ml: 1 }}>
-                                <Rating value={getOverallRating(feedbacks)} precision={0.5} readOnly/> 
+                                <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === match.params.name))} precision={0.5} readOnly/> 
                             </Grid>
                         </Grid> 
                         }

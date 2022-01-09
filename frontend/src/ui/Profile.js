@@ -93,7 +93,7 @@ function Profile() {
                                 <Typography sx={{ ml: 3 }} variant="h5" component="div">Overall rating: </Typography>
                             </Grid>
                             <Grid item xs={2} sx={{ ml: 1 }}>
-                                <Rating value={getOverallRating(feedbacks)} precision={0.5} readOnly/> 
+                                <Rating value={getOverallRating(feedbacks.filter(x => x.concerned === user.email))} precision={0.5} readOnly/> 
                             </Grid>
                         </Grid> 
                         }
