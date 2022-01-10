@@ -19,7 +19,7 @@ export default function AddRequest1() {
       <Grid container direction="column" justify="center" alignItems="center">
         <br />
         <Button variant="contained" onClick={onClick} color="secondary" alignItems="center" sx={{ borderRadius: 2 }}>
-          Add a request
+          Add an offer
         </Button>
       </Grid>
       <br />

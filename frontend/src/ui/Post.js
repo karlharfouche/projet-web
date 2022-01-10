@@ -51,7 +51,7 @@ function Post({postInfos}) {
                         {postInfos.description}
                     </Typography>
                     <Typography sx={{ fontSize: 17 }} color="text.secondary" variant="h5" component="div">
-                        {postInfos.price}
+                        {postInfos.price} L.L.
                     </Typography>
                 </CardContent>
                 <CardActions>
