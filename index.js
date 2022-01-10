@@ -9,24 +9,31 @@ const Faculties = require('./models/faculties.model')
 const Majors = require('./models/majors.model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const path = require("path")
+require("dotenv").config()
 
 const mongoAtlasUri = 'mongodb+srv://bi:no@cluster0.ldcyl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const port = process.env.PORT || 4000;
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "frontend", "build")))
 
 try {
-     mongoose.connect(
-      mongoAtlasUri,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-      () => console.log("Mongoose is connected")
+    mongoose.connect(
+        mongoAtlasUri,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        () => console.log("Mongoose is connected")
     );
-
-  } catch (e) {
+} catch (e) {
     console.log("Could not connect");
-  }
+}
 
-app.listen(4000, () => {
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
+app.listen(port, () => {
     console.log("Server started @ port 4000")
 })
 
