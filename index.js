@@ -29,14 +29,6 @@ try {
     console.log("Could not connect");
 }
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
-});
-
-app.listen(port, () => {
-    console.log("Server started @ port 4000")
-})
-
 app.post('/api/users/register', async (req, res) => {
     console.log(req.body)
     try {
@@ -165,3 +157,10 @@ app.post('/api/posts/delete/userDel', async (req, res) => {
     return res.json({ status: 'ok' })
 })
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
+app.listen(port, () => {
+    console.log("Server started @ port 4000")
+})
