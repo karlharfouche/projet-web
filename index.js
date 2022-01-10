@@ -12,7 +12,7 @@ const bcrypt = require('bcryptjs')
 const path = require("path")
 require("dotenv").config()
 
-const mongoAtlasUri = 'mongodb+srv://bi:no@cluster0.ldcyl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+//const mongoAtlasUri = 'mongodb+srv://bi:no@cluster0.ldcyl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const port = process.env.PORT || 4000;
 
 app.use(cors())
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "frontend", "build")))
 
 try {
     mongoose.connect(
-        mongoAtlasUri,
+        process.env.MONGODB_URI,
         { useNewUrlParser: true, useUnifiedTopology: true },
         () => console.log("Mongoose is connected")
     );
